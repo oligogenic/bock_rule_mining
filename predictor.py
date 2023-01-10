@@ -22,8 +22,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def main():
-
+def parse_args():
     parser = argparse.ArgumentParser(description='Utility to predict gene pairs with BOCK mined rules and evaluate the model performances')
 
     parser.add_argument('action', nargs='?', action="store")
@@ -57,6 +56,13 @@ def main():
     parser.add_argument("--spark_mode", action="store", dest="spark_mode", default=False)
 
     args = parser.parse_args()
+
+    return args
+
+
+def main():
+
+    args = parse_args()
 
     if args.action == "predict":
         predict(**vars(args))
