@@ -46,7 +46,7 @@ class CSVFileReader:
 class CSVFileWriter:
     def __init__(self, file_path, delimiter):
         self.file_path = os.path.expanduser(file_path)
-        self.file = open(file_path, 'w', newline='\n', encoding='utf-8')
+        self.file = open(self.file_path, 'w', newline='\n', encoding='utf-8')
         self.writer = csv.writer(self.file, delimiter=delimiter, quoting=csv.QUOTE_MINIMAL, lineterminator='\n')
 
     def __enter__(self):
