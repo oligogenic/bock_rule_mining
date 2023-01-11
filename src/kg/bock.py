@@ -15,7 +15,6 @@ class BOCK:
         self.bock_index_cache = Cache("bock_index", update_cache, single_file=True)
         self.filter_flags_cache = Cache("bock_filter_flags", update_cache, single_file=True)
         self.g = self.load_graph_from_graphml(kg_graphml_path)
-        self.g.list_properties()
         self.index = self.get_kg_index()
         self.nomenclature = BOCKNomenclature(self, update_cache=update_cache)
 
@@ -24,6 +23,7 @@ class BOCK:
 
     def _load_graph_from_graphml(self, kg_graphml_path):
         g = load_graph(kg_graphml_path, fmt='graphml')
+        g.list_properties()
         return self._index_edge_types(g)
 
     def _index_edge_types(self, g):
