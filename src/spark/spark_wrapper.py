@@ -3,6 +3,7 @@ from ..config import spark_config
 import zipfile
 import os
 import copy
+import sys
 
 import logging
 logger = logging.getLogger(__name__)
@@ -43,7 +44,8 @@ class SparkUtil:
         sc.setLogLevel("WARN")
 
         if master == 'yarn':
-            zipped_codebase = SparkUtil.zip_codebase(os.path.abspath('.'), ['caches', 'datasets', 'pretrained_models'])
+            project_folder = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', '..'))
+            zipped_codebase = SparkUtil.zip_codebase(project_folder, ['caches', 'datasets', 'pretrained_models', '.git'])
             sc.addPyFile(zipped_codebase)
 
         return sc
@@ -83,9 +85,10 @@ class SparkUtil:
         zf = zipfile.ZipFile(output_zip, "w")
         for dirname, subdirs, files in os.walk(input_folder):
             SparkUtil.exclude_folders(subdirs, excluded_folders)
-            zf.write(os.path.relpath(dirname))
+            zf.write(dirname, os.path.relpath(dirname, input_folder))
             for filename in files:
-                zf.write(os.path.relpath(os.path.join(dirname, filename)))
+                f = os.path.join(dirname, filename)
+                zf.write(f, os.path.relpath(f, input_folder))
         zf.close()
         return output_zip
 
