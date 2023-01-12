@@ -45,7 +45,7 @@ class SparkUtil:
 
         if master == 'yarn':
             project_folder = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', '..'))
-            zipped_codebase = SparkUtil.zip_codebase(project_folder, ['caches', 'datasets', 'pretrained_models', '.git'])
+            zipped_codebase = SparkUtil.zip_codebase(project_folder, ['caches', 'datasets', 'models', '.git'])
             sc.addPyFile(zipped_codebase)
 
         return sc
