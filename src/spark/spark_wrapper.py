@@ -11,8 +11,8 @@ logger = logging.getLogger(__name__)
 
 class SparkUtil:
 
-    def __init__(self, master="yarn", serializer=None):
-        self.sc = SparkUtil.initialize_spark(master, serializer)
+    def __init__(self, master="yarn", serializer=None, project_folder=None):
+        self.sc = SparkUtil.initialize_spark(master, serializer, project_folder)
 
     @staticmethod
     def initialize_spark(master='yarn', serializer=None, project_folder=None):
