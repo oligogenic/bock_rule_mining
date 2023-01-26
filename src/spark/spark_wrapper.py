@@ -15,7 +15,7 @@ class SparkUtil:
         self.sc = SparkUtil.initialize_spark(master, serializer)
 
     @staticmethod
-    def initialize_spark(master='yarn', serializer=None):
+    def initialize_spark(master='yarn', serializer=None, project_folder=None):
 
         import pyspark
         import findspark
@@ -44,8 +44,8 @@ class SparkUtil:
         sc.setLogLevel("WARN")
 
         if master == 'yarn':
-            project_folder = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', '..'))
-            zipped_codebase = SparkUtil.zip_codebase(project_folder, ['caches', 'datasets', 'models', '.git'])
+            proj_folder = project_folder if project_folder is not None else os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', '..'))
+            zipped_codebase = SparkUtil.zip_codebase(proj_folder, ['caches', 'datasets', 'models', '.git'])
             sc.addPyFile(zipped_codebase)
 
         return sc
