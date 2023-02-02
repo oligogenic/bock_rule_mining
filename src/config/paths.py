@@ -11,7 +11,7 @@ class DefaultPaths:
 
     def __init__(self):
         self.models_folder = f"{os.path.dirname(__file__)}/../../models/"
-        self.model_analytics_folder = f"{self.models_folder}/../analytics/"
+        self.model_analytics_folder = f"{self.models_folder}/analytics/"
         self.cache_folder = f"{os.path.dirname(__file__)}/../../caches/"
         self.kg_graphml = f"{os.path.dirname(__file__)}/../../datasets/bock.graphml"
         self.neutral_pairs_path = f"{os.path.dirname(__file__)}/../../datasets/neutrals_1KGP_100x.tsv"

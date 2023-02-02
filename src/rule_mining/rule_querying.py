@@ -194,7 +194,7 @@ def _run(rules, metapath_dict, orient_gene_pairs, sc=None, rdd_partitions=None):
     return {pair: matching_rule_indices for pair, matching_rule_indices in match_rules}
 
 
-def run(rules, metapath_dict, algo_params, sample_name, update_cache=False, sc=None, rdd_partitions=None):
+def run(rules, metapath_dict, algo_params, sample_name, update_cache=False, sc=None, rdd_partitions=100):
     logger.info("Running rule querying ...")
     orient_gene_pairs = algo_params["orient_gene_pairs"]
     output_name = Cache.generate_cache_file_name("rule_querying", sample_name, algo_params, 'path_cutoff', 'include_phenotypes', 'minsup_ratio', 'max_rule_length', 'orient_gene_pairs', 'compute_unifications')
