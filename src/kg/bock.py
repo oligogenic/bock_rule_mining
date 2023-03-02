@@ -152,12 +152,13 @@ class BOCK:
             if self.get_node_label(v) == "OligogenicCombination":
                 olida_id = g.vp.id[v]
                 oligogenic_effect = g.vp.oligogenicEffect[v]
-                FAMmanual_score = g.vp.FAMmanual[v]
-                StatMeta_score = g.vp.STATmeta[v]
-                StatManual_score = g.vp.STATmanual[v]
-                FINALmeta_score = g.vp.FINALmeta[v]
+                FAMmanual_score = int(g.vp.FAMmanual[v])
+                StatMeta_score = int(g.vp.STATmeta[v])
+                StatManual_score = int(g.vp.STATmanual[v])
+                FINALmeta_score = int(g.vp.FINALmeta[v])
                 timestamp = g.vp.timestamp[v]
-                DOIs = g.vp.DOIs[v]
+                DOIs = eval(g.vp.DOIs[v])
+                PMIDs = eval(g.vp.PMIDs[v])
 
                 disease_node_ids = set()
                 gene_nodes = []
@@ -180,6 +181,7 @@ class BOCK:
                                   },
                     "timestamp": timestamp,
                     "DOIs": DOIs,
+                    "PMIDs": PMIDs,
                     "disease_nodes": disease_node_ids
                 }
                 if len(gene_nodes) == 2:
